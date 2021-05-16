@@ -653,7 +653,7 @@ yield(void)
   #ifdef MLFQ_SCHED
   struct proc *p2;
   for(p2 = ptable.proc; p2 < &ptable.proc[NPROC]; p2++){
-      if((ticks - p2->time) >= 200 && p2->state == RUNNABLE){
+      if((ticks - p2->time) >= 200 && p2->level == 1 && p2->state == RUNNABLE){
         p2->level = 0;
         p2->priority = 0;
         p2->mytick = 0;
