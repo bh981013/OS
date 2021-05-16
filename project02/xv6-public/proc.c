@@ -329,20 +329,23 @@ int sys_getlev(void){
 
 int setpriority(int pid, int priority){
   struct proc *child = 0;
-  struct proc *curproc = myproc();
+  //struct proc *curproc = myproc();
   //if priority is under 0 or over 10, return -2
-  if(priority < 0 || priority > 10) return -2;  
+  if(priority < 0 || priority > 10){
+    return -2;
+  }   
 
   //find child process
   for(struct proc *p = ptable.proc; p < &ptable.proc[NPROC]; p++){
-      if(p->pid == pid && p->parent != curproc){
-       return -1;
-      }
-      else if(p->pid == pid && p->parent == curproc)
+      if(p->pid == pid){
         child = p;
+        break;
+      }
   }
   //if not found, return -1
-  if(child == 0) return -1;
+  if(child == 0){
+     return -1;
+  }
   
   acquire(&ptable.lock);
   child->priority = priority;
