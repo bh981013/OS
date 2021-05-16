@@ -130,12 +130,14 @@ trap(struct trapframe *tf)
       cur->priority = cur->priority - 1 >= 0? cur->priority - 1: 0;
       cur->mytick = 0;
     }
-    if(cur && cur->mytick >= 200 && tf->trapno == T_IRQ0+IRQ_TIMER){
+    /*
+    if(cur && ticks - cur->time >= 200 && tf->trapno == T_IRQ0+IRQ_TIMER){
       cur->level = 0;
       cur->priority = 0;
       cur->mytick = 0;
+      cur->time = 0;
     }
-  
+    */
   #endif
 
   // Force process to give up CPU on clock tick.
