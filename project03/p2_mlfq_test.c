@@ -3,10 +3,10 @@
 #include "user.h"
 
 #define NUM_CHILD 5
-#define NUM_LOOP1 200000
-#define NUM_LOOP2 500000
-#define NUM_LOOP3 100000
-#define NUM_LOOP4 250000
+#define NUM_LOOP1 20000
+#define NUM_LOOP2 50000
+#define NUM_LOOP3 10000
+#define NUM_LOOP4 25000
 
 int me;
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
       cnt[getlev()]++;
       setpriority(pid, me * 2);
     }
-    printf(1, "process %d: L0=%d, L1=%d\n", pid, cnt[0], cnt[1]);
+    printf(1, "process %d: L0=%d, L1=%d, priority: %d\n", pid, cnt[0], cnt[1], me * 2);
   }
 
   exit_child(p);
